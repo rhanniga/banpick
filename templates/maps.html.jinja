@@ -1,0 +1,95 @@
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .roster {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .winrate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+    }
+    .map-name {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .winrate-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        min-width: 200px;
+        font-size: 1.1em;
+    }
+    .arrow {
+        font-size: 20px;
+        position: absolute;
+    }
+    .arrow.green {
+        color: green;
+        left: 30px;
+    }
+    .arrow.red {
+        color: red;
+        right: 30px;
+    }
+    .rosters h2 {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+    button a {
+        text-decoration: none;
+        color: white;
+    }
+    button {
+        background: #000000;
+        border: none;
+        padding: 8px 16px;
+        margin-top: 20px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+        border-radius: 4px;
+    }
+    button:hover {
+        background: #aaa9a9;
+    }
+</style>
+<div id="map-page">
+    <div class="container" id="container">
+        <div class="rosters">
+            <h2><span>{{optimal_maps.roster_1.name}}</span><span>{{optimal_maps.roster_2.name}}</span></h2>
+        </div>
+        {% for map, winrate in optimal_maps.roster_1.sorted_maps %}
+        <div class="winrate">
+            <div class="map-name">{{ map }}</div>
+            <div class="winrate-display">
+                {% if winrate > 0 %}
+                    <span class="arrow green">&larr;</span>
+                {% endif %}
+                <span>{{ (winrate * 100)|round(2) }}%</span>
+                {% if winrate < 0 %}
+                    <span class="arrow red">&rarr;</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button hx-get="/form"
+            hx-swap="outerHTML"
+            hx-target="#map-page">
+        ⬅
+    </button>
+</div>

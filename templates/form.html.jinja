@@ -1,0 +1,17 @@
+<body>
+    <div class="form-container" id="form-container">
+        <form hx-post="/match" hx-target="#form-container" hx-swap="outerHTML">
+            <input type="text" name="match_url" 
+                id="match-url" 
+                placeholder="Enter the match page URL...">
+            <div>
+                <input type="radio" name="query_length" id="all-time" value="all_time">
+                <label for="all-time">All-time</label><br>
+                <input type="radio" name="query_length" id="past-20" value="past_20">
+                <label for="past-20">Past 20</label><br>
+            <div>
+                <img class="htmx-indicator" src="/static/spinning-circles.svg"/>
+            </div>
+        </form>
+    </div>
+</body>

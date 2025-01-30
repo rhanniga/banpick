@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanPick: </title>
+    <style>
+        body {
+            background: linear-gradient(to right, #000000, #3f3f3f);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input[type="text"] {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .htmx-indicator {
+            display: block;
+            margin: 20px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container" id="form-container">
+        <form hx-post="/match" hx-target="#form-container" hx-swap="outerHTML">
+            <input type="text" name="match_url" 
+                id="match-url" 
+                placeholder="Enter the match page URL...">
+            <div>
+                <input type="radio" name="query_length" id="all-time" value="all_time">
+                <label for="all-time">All-time</label><br>
+                <input type="radio" name="query_length" id="past-20" value="past_20">
+                <label for="past-20">Past 20</label><br>
+            <div>
+                <img class="htmx-indicator" src="/static/spinning-circles.svg"/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
